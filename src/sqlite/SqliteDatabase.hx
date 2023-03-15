@@ -1,12 +1,12 @@
 package sqlite;
 
-import cpp.RawPointer;
 import cpp.ConstCharStar;
-import cpp.Pointer;
 import cpp.Finalizable;
+import cpp.Pointer;
+import cpp.RawPointer;
+import haxe.Exception;
 import sqlite.RawSqlite.*;
 import sqlite.RawSqlite.RawSqliteStmt;
-import haxe.Exception;
 
 @:unreflective
 class SqliteDatabase extends Finalizable {
@@ -51,5 +51,9 @@ class SqliteDatabase extends Finalizable {
         }
 
         return stmt;
+    }
+
+    public function lastInsertRowId():Int {
+        return sqlite3_last_insert_rowid(db.raw);
     }
 }

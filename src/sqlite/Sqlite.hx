@@ -1,9 +1,9 @@
 package sqlite;
 
 import cpp.Pointer;
+import cpp.RawPointer;
 import haxe.Exception;
 import sqlite.RawSqlite.*;
-import cpp.RawPointer;
 
 // adapted somewhat from: https://github.com/davidgiven/stellation/blob/stellation7/src/runtime/cpp/Sqlite.hx
 

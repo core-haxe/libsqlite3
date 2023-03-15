@@ -1,8 +1,8 @@
 package sqlite;
 
 import cpp.ConstCharStar;
-import cpp.RawPointer;
 import cpp.Pointer;
+import cpp.RawPointer;
 
 @:include("sqlite3.h")
 @:native("sqlite3_value")
@@ -22,6 +22,7 @@ extern class RawSqliteStmt {
 extern class RawSqlite {
     @:native("sqlite3_open")                static function sqlite3_open(filename:ConstCharStar, db:RawPointer<RawPointer<RawSqlite>>):Int;
     @:native("sqlite3_errmsg")              static function sqlite3_errmsg(db:RawPointer<RawSqlite>):ConstCharStar;
+    @:native("sqlite3_last_insert_rowid")   static function sqlite3_last_insert_rowid(db:RawPointer<RawSqlite>):Int;
     @:native("sqlite3_errstr")              static function sqlite3_errstr(code:Int):ConstCharStar;
     @:native("sqlite3_errcode")             static function sqlite3_errcode(db:RawPointer<RawSqlite>):Int;
     @:native("sqlite3_extended_errcode")    static function sqlite3_extended_errcode(db:RawPointer<RawSqlite>):Int;
