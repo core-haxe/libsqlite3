@@ -19,8 +19,14 @@ class SqliteStatement extends Finalizable {
     }
 
     public override function finalize() {
-        sqlite3_finalize(stmt.raw);
+        close();
         super.finalize();
+    }
+
+    public function close() {
+        sqlite3_finalize(stmt.raw);
+        this.db = null;
+        this.stmt = null;
     }
 
     public function reset():SqliteStatement {

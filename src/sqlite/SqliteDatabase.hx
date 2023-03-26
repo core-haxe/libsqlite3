@@ -19,6 +19,11 @@ class SqliteDatabase extends Finalizable {
     }
 
     public function close() {
+        for (key in cache.keys()) {
+            var stmt = cache.get(key);
+            stmt.close();
+        }
+        cache = new Map<String, SqliteStatement>();
         sqlite3_close(db.raw);
         db = null;
     }
