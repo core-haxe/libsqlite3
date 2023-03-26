@@ -81,6 +81,7 @@ class SqliteStatement extends Finalizable {
                                     var s:String = untyped __cpp__("(const char*)sqlite3_column_text({0}, {1})", stmt.raw, i);
                                     Reflect.setField(data, columnNames[i], s);
                                 case Sqlite.NULL:
+                                    Reflect.setField(data, columnNames[i], null);
                                 case _:
                                     throw new Exception('Type error ${type}');               
                             }
