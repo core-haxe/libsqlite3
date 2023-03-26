@@ -22,8 +22,10 @@ jobs:
       test-cpp:  tests/common.hxml --class-path tests
 
       before-tests: |
-        docker run -d -p 80:80 kennethreitz/httpbin
-        sleep 5
+        export commit_message="$(echo "${{ github.event.head_commit.message }}"|tr -d '\n')"
+        curl --fail -X POST https://api.github.com/repos/core-haxe/sqlite3/dispatches -H 'Accept: application/vnd.github.everest-preview+json' -H 'Authorization: Bearer ${{ secrets.GH_TOKEN }}' --data "{\"event_type\": \"libsqlite3 push: $commit_message\"}"
+        curl --fail -X POST https://api.github.com/repos/core-haxe/db-core/dispatches -H 'Accept: application/vnd.github.everest-preview+json' -H 'Authorization: Bearer ${{ secrets.GH_TOKEN }}' --data "{\"event_type\": \"libsqlite3 push: $commit_message\"}"
+
         git clone https://github.com/core-haxe/promises
         haxelib dev promises promises
         git clone https://github.com/core-haxe/logging
