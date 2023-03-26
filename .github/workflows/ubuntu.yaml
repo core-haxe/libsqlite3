@@ -1,4 +1,4 @@
-name: hxcpp
+name: ubuntu
 
 on:
   push:
