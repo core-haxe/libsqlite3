@@ -1,0 +1,7 @@
+--class-path .
+--main TestAll
+
+-lib utest
+-lib libsqlite3
+-lib logging
+-lib promises
