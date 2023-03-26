@@ -10,7 +10,7 @@ import sqlite.RawSqlite.*;
 @:buildXml('
     <set name="lib_folder" value="${haxelib:libsqlite3}/lib" />
     <echo value="Using sqlite3 from: ${lib_folder}" />
-    <section if="windows">
+    <section>
         <files id="haxe">
             <compilerflag value="-I${lib_folder}" />
             <file name="${lib_folder}/sqlite3.c" />
