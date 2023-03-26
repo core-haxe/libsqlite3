@@ -29,7 +29,7 @@ class SqliteDatabase extends Finalizable {
     }
 
     public override function finalize() {
-        close();
+        //close();
         super.finalize();
     }
 
