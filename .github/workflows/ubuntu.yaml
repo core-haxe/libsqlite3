@@ -4,6 +4,9 @@ on:
   push:
   pull_request:
 
+env:
+  gh_token: ${{ secrets.GH_TOKEN }}
+
 jobs:
   run-tests:
     uses: vegardit/haxe-reusable-workflows/.github/workflows/test-with-haxe.yml@v1
@@ -23,7 +26,6 @@ jobs:
 
       before-tests: |
         export commit_message="$(echo "${{ github.event.head_commit.message }}"|tr -d '\n')"
-        export gh_token="$(echo "${{ secrets.GH_TOKEN }}"|tr -d '\n')"
         curl --fail -X POST https://api.github.com/repos/core-haxe/sqlite3/dispatches -H 'Accept: application/vnd.github.everest-preview+json' -H 'Authorization: Bearer $gh_token' --data "{\"event_type\": \"libsqlite3 push: $commit_message\"}"
         curl --fail -X POST https://api.github.com/repos/core-haxe/db-core/dispatches -H 'Accept: application/vnd.github.everest-preview+json' -H 'Authorization: Bearer $gh_token' --data "{\"event_type\": \"libsqlite3 push: $commit_message\"}"
 
