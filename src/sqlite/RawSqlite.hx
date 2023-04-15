@@ -3,6 +3,7 @@ package sqlite;
 import cpp.ConstCharStar;
 import cpp.Pointer;
 import cpp.RawPointer;
+import cpp.RawConstPointer;
 
 @:include("sqlite3.h")
 @:native("sqlite3_value")
@@ -37,6 +38,8 @@ extern class RawSqlite {
     @:native("sqlite3_column_type")         static function sqlite3_column_type(stmt:RawPointer<RawSqliteStmt>, index:Int):Int;
     @:native("sqlite3_column_int")          static function sqlite3_column_int(stmt:RawPointer<RawSqliteStmt>, index:Int):Int;
     @:native("sqlite3_column_double")       static function sqlite3_column_double(stmt:RawPointer<RawSqliteStmt>, index:Int):Float;
+    @:native("sqlite3_column_blob")         static function sqlite3_column_blob(stmt:RawPointer<RawSqliteStmt>, index:Int):RawConstPointer<cpp.Void>;
+    @:native("sqlite3_column_bytes")        static function sqlite3_column_bytes(stmt:RawPointer<RawSqliteStmt>, index:Int):Int;
     @:native("sqlite3_value_free")          static function sqlite3_value_free(value:RawPointer<RawSqliteValue>):Void;
     @:native("sqlite3_value_type")          static function sqlite3_value_type(value:RawPointer<RawSqliteValue>):Int;
     @:native("sqlite3_value_int")           static function sqlite3_value_int(value:RawPointer<RawSqliteValue>):Int;

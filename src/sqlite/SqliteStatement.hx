@@ -1,5 +1,11 @@
 package sqlite;
 
+import cpp.ConstPointer;
+import cpp.UInt8;
+import cpp.RawConstPointer;
+import cpp.NativeArray;
+import haxe.io.BytesData;
+import haxe.io.Bytes;
 import haxe.Exception;
 import cpp.Pointer;
 import cpp.Finalizable;
@@ -84,8 +90,15 @@ class SqliteStatement extends Finalizable {
                                     var s:String = untyped __cpp__("(const char*)sqlite3_column_text({0}, {1})", stmt.raw, i);
                                     Reflect.setField(data, columnNames[i], s);
                                 case Sqlite.BLOB:
-                                    var s:String = untyped __cpp__("(const char*)sqlite3_column_text({0}, {1})", stmt.raw, i);
-                                    Reflect.setField(data, columnNames[i], s);
+                                    var rawData:RawConstPointer<cpp.Void> = sqlite3_column_blob(stmt.raw, i);
+                                    var p:ConstPointer<cpp.Void> = ConstPointer.fromRaw(rawData);
+                                    var size:Int = sqlite3_column_bytes(stmt.raw, i);
+                                    var bytesData:Array<UInt8> = NativeArray.create(size);
+                                    NativeArray.setData(bytesData, p.reinterpret(), size);
+                                    var bytes:Bytes = Bytes.ofData(bytesData);
+                                    var bytesCopy:Bytes = Bytes.alloc(size); // need to maybe a copy, gc'd or freed maybe?
+                                    bytesCopy.blit(0, bytes, 0, size);
+                                    Reflect.setField(data, columnNames[i], bytesCopy);
                                 case Sqlite.NULL:
                                     Reflect.setField(data, columnNames[i], null);
                                 case _:

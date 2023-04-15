@@ -13,6 +13,7 @@ class TestAll {
         runner.addCase(new TestPreparedQuery());
         runner.addCase(new TestInnerJoin());
         runner.addCase(new TestPreparedInnerJoin());
+        runner.addCase(new TestBlob());
 
         Report.create(runner, SuccessResultsDisplayMode.AlwaysShowSuccessResults, HeaderDisplayMode.NeverShowHeader);
         runner.run();
