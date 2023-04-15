@@ -11,7 +11,7 @@ class DBCreator {
             File.saveContent("persons.db", "");
             var db = Sqlite.open("persons.db");
             var stmt = db.prepare("CREATE TABLE Person (
-                personId int,
+                personId INTEGER PRIMARY KEY AUTOINCREMENT,
                 lastName varchar(50),
                 firstName varchar(50),
                 iconId int,

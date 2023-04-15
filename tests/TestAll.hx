@@ -11,6 +11,8 @@ class TestAll {
         
         runner.addCase(new TestQuery());
         runner.addCase(new TestPreparedQuery());
+        runner.addCase(new TestInsert());
+        runner.addCase(new TestPreparedInsert());
         runner.addCase(new TestInnerJoin());
         runner.addCase(new TestPreparedInnerJoin());
         runner.addCase(new TestBlob());
