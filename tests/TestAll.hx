@@ -16,6 +16,7 @@ class TestAll {
         runner.addCase(new TestInnerJoin());
         runner.addCase(new TestPreparedInnerJoin());
         runner.addCase(new TestBlob());
+        runner.addCase(new TestPreparedBlob());
 
         Report.create(runner, SuccessResultsDisplayMode.AlwaysShowSuccessResults, HeaderDisplayMode.NeverShowHeader);
         runner.run();

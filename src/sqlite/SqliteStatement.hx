@@ -55,6 +55,13 @@ class SqliteStatement extends Finalizable {
         return this;
     }
 
+    public function bindBytes(index:Int, value:Bytes):SqliteStatement {
+        var len = value.length;
+        var p = NativeArray.address(value.getData(), 0);
+        untyped __cpp__("sqlite3_bind_blob({0}, {1}, {2}, {3}, SQLITE_TRANSIENT)", stmt, index, p, len);
+        return this;
+    }
+
     public function executeStatement() {
         var i = sqlite3_step(stmt.raw);
         if (i != Sqlite.DONE) {
