@@ -29,10 +29,13 @@ class SqliteDatabase extends Finalizable {
     }
 
     public override function finalize() {
-        //close();
+        if (!useStatmentCache) {
+            close();
+        }
         super.finalize();
     }
 
+    private var useStatmentCache:Bool = false; // lets keep the cache, but turn it off, may be useful in the future
     public function prepare(sql:String):SqliteStatement {
         var stmt = cache[sql];
         if (stmt == null) {
@@ -50,7 +53,9 @@ class SqliteDatabase extends Finalizable {
             }
 
             stmt = new SqliteStatement(db, Pointer.fromRaw(rawstmt));
-            cache[sql] = stmt;
+            if (useStatmentCache) {
+                cache[sql] = stmt;
+            }
         } else {
             stmt.reset();
         }
