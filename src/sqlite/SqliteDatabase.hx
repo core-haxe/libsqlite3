@@ -30,7 +30,7 @@ class SqliteDatabase extends Finalizable {
 
     public override function finalize() {
         if (!useStatmentCache) {
-            close();
+            //close();
         }
         super.finalize();
     }
