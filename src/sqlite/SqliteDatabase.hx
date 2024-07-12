@@ -66,4 +66,8 @@ class SqliteDatabase extends Finalizable {
     public function lastInsertRowId():Int {
         return sqlite3_last_insert_rowid(db.raw);
     }
+
+    public function changes():Int {
+        return sqlite3_changes(db.raw);
+    }
 }
