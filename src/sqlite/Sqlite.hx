@@ -7,17 +7,6 @@ import sqlite.RawSqlite.*;
 
 // adapted somewhat from: https://github.com/davidgiven/stellation/blob/stellation7/src/runtime/cpp/Sqlite.hx
 
-@:buildXml('
-    <set name="lib_folder" value="${haxelib:libsqlite3}/lib" />
-    <echo value="Using sqlite3 from: ${lib_folder}" />
-    <section>
-        <files id="haxe">
-        <compilerflag value="-I${lib_folder}" />
-        <compilerflag value="-DSQLITE_OMIT_SHARED_CACHE" />
-        <file name="${lib_folder}/sqlite3.c" />
-        </files>
-    </section>
-')
 @:unreflective
 class Sqlite {
     public static final DONE:Int = untyped __cpp__("SQLITE_DONE");

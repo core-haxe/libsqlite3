@@ -17,6 +17,17 @@ extern class RawSqliteValue {
 extern class RawSqliteStmt {
 }
 
+@:buildXml('
+    <set name="lib_folder" value="${haxelib:libsqlite3}/lib" />
+    <echo value="Using sqlite3 from: ${lib_folder}" />
+    <section>
+        <files id="haxe">
+        <compilerflag value="-I${lib_folder}" />
+        <compilerflag value="-DSQLITE_OMIT_SHARED_CACHE" />
+        <file name="${lib_folder}/sqlite3.c" />
+        </files>
+    </section>
+')
 @:include("sqlite3.h")
 @:native("sqlite3")
 @:unreflective
